@@ -21,13 +21,13 @@ public class DesafioSimplifyTecApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(TarefaDAO tarefaDAO, UsuarioDAO usuarioDAO) {
 		return runner ->{
-			System.out.println("Application is running");
+			System.out.println("Application is running");/*
 			MetodosUsuario gerenciadorUsuarios = new MetodosUsuario();
 			gerenciadorUsuarios.criarUsuario(usuarioDAO, "Carlos do teste", "carlos@teste.com", "123!Senha");
 			Usuario usuarioTeste = usuarioDAO.findById(2);
 			MetodosTarefa gerenciadorTarefas = new MetodosTarefa();
 			gerenciadorTarefas.criarTarefa(tarefaDAO,"Criar sistema post","Sistema post para gerenciar tarefas",2,usuarioTeste);
-
+			*/
 		};
 	}
 }
