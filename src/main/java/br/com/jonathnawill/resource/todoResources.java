@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.jonathnawill.entity.Todo;
 import br.com.jonathnawill.service.todoService;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/todos")
+@RequestMapping("/todos")
 public class todoResources {
 
 	@Autowired
 	private todoService service;
 
 	@PostMapping
-	public List<Todo> create(@RequestBody Todo todo) {
+	public List<Todo> create(@Valid @RequestBody Todo todo) {
 		return service.create(todo);
 	}
 

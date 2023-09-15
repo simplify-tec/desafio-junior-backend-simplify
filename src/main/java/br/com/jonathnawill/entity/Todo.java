@@ -8,9 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "todos")
+@Table(name = "tb_todos")
 public class Todo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,9 +19,12 @@ public class Todo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	private String name;
+	
+	@NotBlank
+	private String nome;
+	@NotBlank
 	private String descricao;
+	
 	private boolean realizado;
 	private int prioridade;
 
@@ -28,9 +32,16 @@ public class Todo implements Serializable {
 
 	}
 
-	public Todo(Long id, String name, String descricao, boolean realizado, int prioridade) {
+	public Todo(Long id,  String nome,  String descricao, boolean realizado, int prioridade) {
 		this.id = id;
-		this.name = name;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.realizado = realizado;
+		this.prioridade = prioridade;
+	}
+
+	public Todo(String nome, String descricao, boolean realizado, int prioridade) {
+		this.nome = nome;
 		this.descricao = descricao;
 		this.realizado = realizado;
 		this.prioridade = prioridade;
@@ -44,12 +55,12 @@ public class Todo implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDescricao() {
