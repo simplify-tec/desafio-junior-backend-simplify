@@ -1,7 +1,8 @@
 package br.com.jonathnawill.entity;
 
 import java.io.Serializable;
-import java.util.Objects;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,20 +12,19 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "tb_todos")
+@Table(name = "todos")
 public class Todo implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@NotBlank
 	private String nome;
 	@NotBlank
 	private String descricao;
-	
 	private boolean realizado;
 	private int prioridade;
 
@@ -32,7 +32,7 @@ public class Todo implements Serializable {
 
 	}
 
-	public Todo(Long id,  String nome,  String descricao, boolean realizado, int prioridade) {
+	public Todo(Long id, @NotBlank String nome, @NotBlank String descricao, boolean realizado, int prioridade) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -88,20 +88,8 @@ public class Todo implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Todo other = (Todo) obj;
-		return Objects.equals(id, other.id);
+		return EqualsBuilder.reflectionEquals(obj, this);
 	}
 
 }

@@ -3,6 +3,8 @@ package br.com.jonathnawill.resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +26,8 @@ public class todoResources {
 	private todoService service;
 
 	@PostMapping
-	public List<Todo> create(@Valid @RequestBody Todo todo) {
-		return service.create(todo);
+	public ResponseEntity<List<Todo>> create(@Valid @RequestBody Todo todo) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.create(todo));
 	}
 
 	@GetMapping
@@ -33,12 +35,12 @@ public class todoResources {
 		return service.list();
 	}
 
-	@PutMapping
-	public List<Todo> update(@RequestBody Todo todo) {
-		return service.update(todo);
+	@PutMapping("{id}")
+	public List<Todo> update(@PathVariable Long id, @RequestBody Todo todo) {
+		return service.update(id, todo);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("{id}")
 	public List<Todo> delete(@PathVariable("id") Long id) {
 		return service.delete(id);
 	}

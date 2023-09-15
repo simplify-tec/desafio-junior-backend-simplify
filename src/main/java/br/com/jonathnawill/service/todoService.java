@@ -23,13 +23,13 @@ public class todoService {
 	}
 
 	public List<Todo> list() {
-		 Sort sort = Sort.by(Direction.DESC, "prioridade")
-			        .and(Sort.by(Direction.ASC, "id"));
+		Sort sort = Sort.by(Direction.DESC, "prioridade").and(Sort.by(Direction.ASC, "id"));
 
 		return repository.findAll(sort);
 	}
 
-	public List<Todo> update(Todo todo) {
+	public List<Todo> update(Long id, Todo todo) {
+		repository.findById(id);
 		repository.save(todo);
 		return list();
 	}
