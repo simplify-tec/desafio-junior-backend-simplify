@@ -1,7 +1,7 @@
 package br.com.enzohonorato.todolist.controller;
 
 import br.com.enzohonorato.todolist.domain.User;
-import br.com.enzohonorato.todolist.requests.UserPostRequestBody;
+import br.com.enzohonorato.todolist.requests.user.UserPostRequestBody;
 import br.com.enzohonorato.todolist.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

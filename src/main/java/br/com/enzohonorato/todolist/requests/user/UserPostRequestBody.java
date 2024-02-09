@@ -1,4 +1,4 @@
-package br.com.enzohonorato.todolist.requests;
+package br.com.enzohonorato.todolist.requests.user;
 
 import lombok.Getter;
 import lombok.Setter;

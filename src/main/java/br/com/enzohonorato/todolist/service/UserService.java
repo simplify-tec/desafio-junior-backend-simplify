@@ -2,7 +2,7 @@ package br.com.enzohonorato.todolist.service;
 
 import br.com.enzohonorato.todolist.domain.User;
 import br.com.enzohonorato.todolist.repository.UserRepository;
-import br.com.enzohonorato.todolist.requests.UserPostRequestBody;
+import br.com.enzohonorato.todolist.requests.user.UserPostRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
