@@ -1,13 +1,17 @@
 package br.com.enzohonorato.todolist.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "tasks")
 @Getter
 @Setter
+@Builder
+@ToString
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
