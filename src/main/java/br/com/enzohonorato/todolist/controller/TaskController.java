@@ -1,17 +1,14 @@
 package br.com.enzohonorato.todolist.controller;
 
 import br.com.enzohonorato.todolist.domain.Task;
-import br.com.enzohonorato.todolist.domain.User;
 import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
 import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
 import br.com.enzohonorato.todolist.requests.task.TaskPriority;
 import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
 import br.com.enzohonorato.todolist.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

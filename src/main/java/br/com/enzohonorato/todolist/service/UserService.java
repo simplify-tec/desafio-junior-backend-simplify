@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
+    //private final ModelMapper modelMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -23,6 +23,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(UserPostRequestBody userPostRequestBody) {
+        ModelMapper modelMapper = new ModelMapper();
         User user = modelMapper.map(userPostRequestBody, User.class);
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

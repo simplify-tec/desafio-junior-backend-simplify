@@ -7,6 +7,7 @@ import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
 import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
 import br.com.enzohonorato.todolist.requests.task.TaskPriority;
 import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -20,9 +21,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskService {
     private final TaskRepository taskRepository;
-    private final ModelMapper modelMapper;
+    //private final ModelMapper modelMapper;
 
     public Task save(TaskPostRequestBody taskPostRequestBody) {
+        ModelMapper modelMapper = new ModelMapper();
         Task task = modelMapper.map(taskPostRequestBody, Task.class);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -38,6 +40,7 @@ public class TaskService {
         List<Task> taskList = taskRepository.findByUser(user);
         List<TaskGetResponseBody> tasks = new ArrayList<>();
 
+        ModelMapper modelMapper = new ModelMapper();
         for (Task task : taskList) {
             tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
         }
@@ -52,6 +55,7 @@ public class TaskService {
         List<Task> taskList = taskRepository.findByUserAndPriority(user.getId(), taskPriority.NAME);
         List<TaskGetResponseBody> tasks = new ArrayList<>();
 
+        ModelMapper modelMapper = new ModelMapper();
         for (Task task : taskList) {
             tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
         }
@@ -68,6 +72,7 @@ public class TaskService {
         List<Task> taskList = taskRepository.findByUserAndDone(user.getId(), bit);
         List<TaskGetResponseBody> tasks = new ArrayList<>();
 
+        ModelMapper modelMapper = new ModelMapper();
         for (Task task : taskList) {
             tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
         }
@@ -98,6 +103,7 @@ public class TaskService {
             throw new RuntimeException("User has no task with the given id");
         }
 
+        ModelMapper modelMapper = new ModelMapper();
         task = modelMapper.map(taskPutRequestBody, Task.class);
         task.setUser(user);
 
