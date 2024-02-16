@@ -128,7 +128,7 @@ class TaskControllerTest {
     }
 
     @Test
-    void update_ReturnsNoContent_WhenSuccessful() {
+    void update_ReturnsResponseEntityWithStatusCode204_WhenSuccessful() {
         // Act
         ResponseEntity<Void> responseEntity = taskController.update(taskPutRequestBodyToBeUpdated);
 
