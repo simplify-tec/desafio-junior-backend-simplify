@@ -1,6 +1,7 @@
-package br.com.enzohonorato.todolist.util;
+package br.com.enzohonorato.todolist.util.task;
 
 import br.com.enzohonorato.todolist.domain.Task;
+import br.com.enzohonorato.todolist.util.user.UserCreator;
 
 public class TaskCreator {
     public static Task createTaskToBeSaved() {

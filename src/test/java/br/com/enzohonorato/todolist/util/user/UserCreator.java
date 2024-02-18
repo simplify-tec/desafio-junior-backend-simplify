@@ -1,4 +1,4 @@
-package br.com.enzohonorato.todolist.util;
+package br.com.enzohonorato.todolist.util.user;
 
 import br.com.enzohonorato.todolist.domain.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,5 +12,19 @@ public class UserCreator {
                 .username("Enzo")
                 .password(ENCODED_PASSWORD)
                 .role("USER").build();
+    }
+
+    public static User createUserToBeSaved() {
+        return User.builder()
+                .username("Enzo")
+                .password(ENCODED_PASSWORD)
+                .role("USER").build();
+    }
+
+    public static User createAdminUserToBeSaved() {
+        return User.builder()
+                .username("Admin")
+                .password(ENCODED_PASSWORD)
+                .role("ADMIN").build();
     }
 }

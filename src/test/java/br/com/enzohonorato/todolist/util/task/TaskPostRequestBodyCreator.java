@@ -1,4 +1,4 @@
-package br.com.enzohonorato.todolist.util;
+package br.com.enzohonorato.todolist.util.task;
 
 import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
 import br.com.enzohonorato.todolist.requests.task.TaskPriority;

@@ -1,15 +1,9 @@
 package br.com.enzohonorato.todolist.controller;
 
 import br.com.enzohonorato.todolist.domain.Task;
-import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPriority;
-import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
+import br.com.enzohonorato.todolist.requests.task.*;
 import br.com.enzohonorato.todolist.service.TaskService;
-import br.com.enzohonorato.todolist.util.TaskCreator;
-import br.com.enzohonorato.todolist.util.TaskGetResponseBodyCreator;
-import br.com.enzohonorato.todolist.util.TaskPostRequestBodyCreator;
-import br.com.enzohonorato.todolist.util.TaskPutRequestBodyCreator;
+import br.com.enzohonorato.todolist.util.task.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,17 +29,17 @@ class TaskControllerTest {
     private TaskController taskController;
 
     TaskGetResponseBody taskGetResponseBody;
-    Task savedTask;
     TaskPostRequestBody taskPostRequestBodyToBeSaved;
     TaskPutRequestBody taskPutRequestBodyToBeUpdated;
+    SavedTaskResponseBody savedTaskResponseBody;
 
 
     @BeforeEach
     void setUp() {
         taskGetResponseBody = TaskGetResponseBodyCreator.createTaskGetResponseBody();
-        savedTask = TaskCreator.createSavedTask();
         taskPostRequestBodyToBeSaved = TaskPostRequestBodyCreator.createTaskPostRequestBodyToBeSaved();
         taskPutRequestBodyToBeUpdated = TaskPutRequestBodyCreator.createTaskPutRequestBodyToBeUpdated();
+        savedTaskResponseBody = SavedTaskResponseBodyCreator.createSavedTaskResponseBody();
 
         BDDMockito.lenient().when(taskService.findByUser()).thenReturn(List.of(taskGetResponseBody));
 
@@ -53,7 +47,7 @@ class TaskControllerTest {
 
         BDDMockito.lenient().when(taskService.findByUserAndDone(ArgumentMatchers.anyBoolean())).thenReturn(List.of(taskGetResponseBody));
 
-        BDDMockito.lenient().when(taskService.save(ArgumentMatchers.any(TaskPostRequestBody.class))).thenReturn(savedTask);
+        BDDMockito.lenient().when(taskService.save(ArgumentMatchers.any(TaskPostRequestBody.class))).thenReturn(savedTaskResponseBody);
 
         BDDMockito.lenient().doNothing().when(taskService).delete(ArgumentMatchers.anyLong());
 
@@ -100,9 +94,9 @@ class TaskControllerTest {
     }
 
     @Test
-    void save_ReturnsTaskWithinResponseEntityWithStatusCode201_WhenSuccessful() {
+    void save_ReturnsSavedTaskResponseBodyWithinResponseEntityWithStatusCode201_WhenSuccessful() {
         // Act
-        ResponseEntity<Task> responseEntity = taskController.save(taskPostRequestBodyToBeSaved);
+        ResponseEntity<SavedTaskResponseBody> responseEntity = taskController.save(taskPostRequestBodyToBeSaved);
 
         // Assert
         Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -111,7 +105,7 @@ class TaskControllerTest {
         Assertions.assertThat(responseEntity.getBody().getId()).isNotNull();
         Assertions.assertThat(responseEntity.getBody().getName()).isEqualTo(taskPostRequestBodyToBeSaved.getName());
         Assertions.assertThat(responseEntity.getBody().getDescription()).isEqualTo(taskPostRequestBodyToBeSaved.getDescription());
-        Assertions.assertThat(responseEntity.getBody().getPriority()).isEqualTo(taskPostRequestBodyToBeSaved.getPriority().NAME);
+        Assertions.assertThat(responseEntity.getBody().getPriority()).isEqualTo(taskPostRequestBodyToBeSaved.getPriority());
         Assertions.assertThat(responseEntity.getBody().getDone()).isEqualTo(taskPostRequestBodyToBeSaved.getDone());
     }
 

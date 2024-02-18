@@ -1,10 +1,6 @@
 package br.com.enzohonorato.todolist.controller;
 
-import br.com.enzohonorato.todolist.domain.Task;
-import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPriority;
-import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
+import br.com.enzohonorato.todolist.requests.task.*;
 import br.com.enzohonorato.todolist.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,7 +33,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> save(@RequestBody TaskPostRequestBody taskPostRequestBody) {
+    public ResponseEntity<SavedTaskResponseBody> save(@RequestBody TaskPostRequestBody taskPostRequestBody) {
         return new ResponseEntity<>(taskService.save(taskPostRequestBody), HttpStatus.CREATED);
     }
 

@@ -3,14 +3,11 @@ package br.com.enzohonorato.todolist.service;
 import br.com.enzohonorato.todolist.domain.Task;
 import br.com.enzohonorato.todolist.domain.User;
 import br.com.enzohonorato.todolist.repository.TaskRepository;
-import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPriority;
-import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
-import br.com.enzohonorato.todolist.util.TaskCreator;
-import br.com.enzohonorato.todolist.util.TaskPostRequestBodyCreator;
-import br.com.enzohonorato.todolist.util.TaskPutRequestBodyCreator;
-import br.com.enzohonorato.todolist.util.UserCreator;
+import br.com.enzohonorato.todolist.requests.task.*;
+import br.com.enzohonorato.todolist.util.task.TaskCreator;
+import br.com.enzohonorato.todolist.util.task.TaskPostRequestBodyCreator;
+import br.com.enzohonorato.todolist.util.task.TaskPutRequestBodyCreator;
+import br.com.enzohonorato.todolist.util.user.UserCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +17,6 @@ import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -73,16 +69,15 @@ class TaskServiceTest {
 
     @Test
     void save_ReturnsSavedTask_WhenSuccessful() {
-        Task task = taskService.save(taskPostRequestBodyToBeSaved);
+        SavedTaskResponseBody savedTaskResponseBody = taskService.save(taskPostRequestBodyToBeSaved);
 
-        Assertions.assertThat(task).isNotNull();
-        Assertions.assertThat(task.getId()).isNotNull();
+        Assertions.assertThat(savedTaskResponseBody).isNotNull();
+        Assertions.assertThat(savedTaskResponseBody.getId()).isNotNull();
 
-        Assertions.assertThat(task.getName()).isEqualTo(taskPostRequestBodyToBeSaved.getName());
-        Assertions.assertThat(task.getDescription()).isEqualTo(taskPostRequestBodyToBeSaved.getDescription());
-        Assertions.assertThat(task.getPriority()).isEqualTo(taskPostRequestBodyToBeSaved.getPriority().NAME);
-        Assertions.assertThat(task.getDone()).isEqualTo(taskPostRequestBodyToBeSaved.getDone());
-        Assertions.assertThat(task.getUser()).isEqualTo(savedUser);
+        Assertions.assertThat(savedTaskResponseBody.getName()).isEqualTo(taskPostRequestBodyToBeSaved.getName());
+        Assertions.assertThat(savedTaskResponseBody.getDescription()).isEqualTo(taskPostRequestBodyToBeSaved.getDescription());
+        Assertions.assertThat(savedTaskResponseBody.getPriority()).isEqualTo(taskPostRequestBodyToBeSaved.getPriority());
+        Assertions.assertThat(savedTaskResponseBody.getDone()).isEqualTo(taskPostRequestBodyToBeSaved.getDone());
     }
 
     @Test

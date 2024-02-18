@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskGetResponseBody {
+public class SavedTaskResponseBody {
     private Long id;
     private String name;
     private String description;

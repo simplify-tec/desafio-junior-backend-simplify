@@ -3,11 +3,7 @@ package br.com.enzohonorato.todolist.service;
 import br.com.enzohonorato.todolist.domain.Task;
 import br.com.enzohonorato.todolist.domain.User;
 import br.com.enzohonorato.todolist.repository.TaskRepository;
-import br.com.enzohonorato.todolist.requests.task.TaskGetResponseBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPostRequestBody;
-import br.com.enzohonorato.todolist.requests.task.TaskPriority;
-import br.com.enzohonorato.todolist.requests.task.TaskPutRequestBody;
-import lombok.NoArgsConstructor;
+import br.com.enzohonorato.todolist.requests.task.*;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -23,14 +19,15 @@ public class TaskService {
     private final TaskRepository taskRepository;
     //private final ModelMapper modelMapper;
 
-    public Task save(TaskPostRequestBody taskPostRequestBody) {
+    public SavedTaskResponseBody save(TaskPostRequestBody taskPostRequestBody) {
         ModelMapper modelMapper = new ModelMapper();
         Task task = modelMapper.map(taskPostRequestBody, Task.class);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         task.setUser((User) authentication.getPrincipal());
 
-        return taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
+        return modelMapper.map(savedTask, SavedTaskResponseBody.class);
     }
 
     public List<TaskGetResponseBody> findByUser() {

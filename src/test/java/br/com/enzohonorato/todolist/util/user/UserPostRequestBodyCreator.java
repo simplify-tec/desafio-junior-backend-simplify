@@ -1,4 +1,4 @@
-package br.com.enzohonorato.todolist.util;
+package br.com.enzohonorato.todolist.util.user;
 
 import br.com.enzohonorato.todolist.requests.user.UserPostRequestBody;
 import br.com.enzohonorato.todolist.requests.user.UserRole;
