@@ -10,4 +10,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
