@@ -11,6 +11,7 @@ import br.com.enzohonorato.todolist.util.task.TaskPutRequestBodyCreator;
 import br.com.enzohonorato.todolist.util.user.UserCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
@@ -74,6 +75,7 @@ class TaskControllerIT {
     }
 
     @Test
+    @DisplayName("findByPriority deve retornar uma Lista de TaskGetResponseBody com as tarefas de prioridade passada")
     void findByPriority_ReturnsListOfTaskGetResponseBodyWithGivenPriority_WhenUserHasTaskWithGivenPriority() {
         EntityExchangeResult<List<TaskGetResponseBody>> entityExchangeResult = webTestClient
                 .get().uri("/tasks/list/priority?priority=LOW")
@@ -104,6 +106,15 @@ class TaskControllerIT {
         Assertions.assertThat(entityExchangeResult.getResponseBody())
                 .isNotNull()
                 .isEmpty();
+    }
+
+    @Test
+    void findByPriority_ThrowsBadRequestWithStatusCode400_WhenGivenPriorityParameterIsNotValid() {
+        webTestClient
+                .get().uri("/tasks/list/priority?priority=INVALID")
+                .header("Authorization", "Basic " + encodedCredentials)
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 
     @Test

@@ -56,6 +56,8 @@ class TaskControllerTest {
 
     @Test
     void findByUser_ReturnsListOfTaskGetResponseBodyWithinResponseEntityWithStatusCode200_WhenSuccessful() {
+        // Arrange
+
         // Act
         ResponseEntity<List<TaskGetResponseBody>> responseEntity = taskController.findByUser();
 
