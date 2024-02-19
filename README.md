@@ -15,6 +15,7 @@ Exemplo de uso: ``` mvn teste unit-tests ```
 - [JUnit](https://junit.org/junit5/)
 - [Mockito](https://site.mockito.org/)
 - [AssertJ](https://assertj.github.io/doc/)
+- [MySQL](https://www.mysql.com/)
 
 ## **Funcionalidades**
 - Usuário **ADMIN** pode cadastrar novos usuários, com permissão de USER ou ADMIN
