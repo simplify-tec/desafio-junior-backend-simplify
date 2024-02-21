@@ -6,7 +6,7 @@ Foram criados [Maven](https://maven.apache.org/) profiles para execução dos te
 - integration-tests
 - all-tests
 
-Exemplo de uso: ``` mvn teste unit-tests ```
+Exemplo de uso: ``` mvn test unit-tests ```
 
 ## **Tecnologias Utilizadas**
 - [Spring Boot](https://spring.io/projects/spring-boot)
