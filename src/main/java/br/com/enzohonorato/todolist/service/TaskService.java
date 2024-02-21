@@ -31,48 +31,45 @@ public class TaskService {
     }
 
     public List<TaskGetResponseBody> findByUser() {
+        ModelMapper modelMapper = new ModelMapper();
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
 
         List<Task> taskList = taskRepository.findByUser(user);
-        List<TaskGetResponseBody> tasks = new ArrayList<>();
-
-        ModelMapper modelMapper = new ModelMapper();
-        for (Task task : taskList) {
-            tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
-        }
+        List<TaskGetResponseBody> tasks = taskList.stream()
+                .map(task -> modelMapper.map(task, TaskGetResponseBody.class))
+                .toList();
 
         return tasks;
     }
 
     public List<TaskGetResponseBody> findByUserAndPriority(TaskPriority taskPriority) {
+        ModelMapper modelMapper = new ModelMapper();
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
 
         List<Task> taskList = taskRepository.findByUserAndPriority(user.getId(), taskPriority.NAME);
-        List<TaskGetResponseBody> tasks = new ArrayList<>();
-
-        ModelMapper modelMapper = new ModelMapper();
-        for (Task task : taskList) {
-            tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
-        }
+        List<TaskGetResponseBody> tasks = taskList.stream()
+                .map(task -> modelMapper.map(task, TaskGetResponseBody.class))
+                .toList();
 
         return tasks;
     }
 
     public List<TaskGetResponseBody> findByUserAndDone(Boolean done) {
+        ModelMapper modelMapper = new ModelMapper();
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
 
         int bit = done ? 1 : 0;
 
         List<Task> taskList = taskRepository.findByUserAndDone(user.getId(), bit);
-        List<TaskGetResponseBody> tasks = new ArrayList<>();
-
-        ModelMapper modelMapper = new ModelMapper();
-        for (Task task : taskList) {
-            tasks.add(modelMapper.map(task, TaskGetResponseBody.class));
-        }
+        List<TaskGetResponseBody> tasks = taskList.stream()
+                .map(task -> modelMapper.map(task, TaskGetResponseBody.class))
+                .toList();
 
         return tasks;
     }
